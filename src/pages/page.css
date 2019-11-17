@@ -1,0 +1,21 @@
+.container{
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+}
+.home_right{
+    width: 70%;
+    margin-left: 15px;
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+.detail_left{
+    width: 40%;
+    padding: 0px 15px;
+}
+.detail_right{
+    width: 60%;
+    padding: 0px 15px;
+
+}
