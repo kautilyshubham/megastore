@@ -18,7 +18,7 @@ const ShopCard = (props)=>{
                 />
                  <div className="additional">
                      <p className="price">$- {props.price} </p>
-                    <Button type="primary" onClick={props.addToCart}>Add to card</Button>
+                    <Button type="primary" onClick={props.addToCart} disabled={props.addedToCart} >{(props.addedToCart) ? "Added To Cart" :  'Add to card'}</Button>
                  </div>
             </Card>
         )

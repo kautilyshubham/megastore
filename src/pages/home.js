@@ -3,31 +3,33 @@ import Header from '../components/header';
 import ShopCard from '../components/shop-card';
 import './page.css';
 import Sidebar from '../components/sidebar';
+import Cart from '../components/cart';
 
 import { connect } from 'react-redux';
 
 class home extends Component {
     state = { 
-        items : this.props.shopData.items
+        items : this.props.shopData.items,
      }
 
      componentDidUpdate(prevProps){
          if(prevProps.shopData !== this.props.shopData){
              if(this.props.shopData.activeFilter.size){
                  this.setState({
-                    items : this.props.shopData.items.filter(item => item.size.includes(this.props.shopData.activeFilter.size))
+                    items : this.props.shopData.items.filter(item => item.size.includes(this.props.shopData.activeFilter.size)),
+                   
                  })
              }
+           
              else{
                 this.setState({
-                    items : this.props.shopData.items
+                    items : this.props.shopData.items,
                  })
              }
          }
      }
 
     render() { 
-        console.log(this.props.shopData.activeFilter.size.length);
         const latestItems = this.state.items.map(item=>{
                                     return(
                                         <ShopCard
@@ -37,7 +39,10 @@ class home extends Component {
                                         name={item.name} 
                                         category={item.category} 
                                         price={item.price}
-                                        addToCart={()=>this.props.addToCart(item)}
+                                        addToCart={()=>{this.props.addToCart(item); 
+                                            this.props.addedToCart(item.id)}}
+                                        addedToCart= {item.addedToCart ? true : false }
+                                       
                                         >
                                         </ShopCard>
                                     )
@@ -47,6 +52,7 @@ class home extends Component {
         return ( 
            <div className="app">
                <Header />
+               <Cart />
                <div className="container" style={{marginTop: "40px"}}>
                    <Sidebar />
                    <div className="home_right">
@@ -64,7 +70,8 @@ const mapStateToProps = state => ({
    })
 
 const mapDispatchToProps = dispatch => ({
-        addToCart : (item) =>dispatch({type: 'ADDTOCART', payLoad: item})
+        addToCart : (item) =>dispatch({type: 'ADDTOCART', payLoad: item}),
+        addedToCart : (itemId)=> dispatch ({type: 'ADDEDTOCART', payLoad: itemId})
     
 })
  

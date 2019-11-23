@@ -7,14 +7,14 @@ import './component.css'
 
 class Header extends Component {
   state = {
-      cartCount: this.props.cartData.cart.length,
+      cartCount: this.props.cartData.cartItems.length,
       cartData: this.props.cartData
   };
 
   componentDidUpdate(prevProps){
      if(prevProps.cartData !== this.props.cartData){
         this.setState({
-         cartCount: this.props.cartData.cart.length
+         cartCount: this.props.cartData.cartItems.length
         })
      }
 
@@ -23,9 +23,9 @@ class Header extends Component {
   render() {
     return (
       <div className="header">
-         <div className="container">
-             <Link to="/" className="logo" >logo</Link>
-               <nav>
+         <div className="container" style={{justifyContent: 'space-between'}}>
+             <Link to="/" className="logo" >Megastore</Link>
+               {/* <nav>
                   <ul>
                      <li><Link className="nav_link" to="/about">About</Link></li>
                      <li><Link className="nav_link" to="/shop">Shop</Link>
@@ -36,8 +36,9 @@ class Header extends Component {
                      </li>
                      <li><Link className="nav_link" to="/">Contact</Link></li>
                   </ul>
-               </nav>
-              <Link to="" className="cart_icon"> 
+               </nav> */}
+              <Link to="" className="cart_icon" 
+              onClick={(e)=>(this.state.cartCount) ? this.props.openCartTray : alert("Your cart is empty")}> 
               <Icon type="shopping-cart"  />
               <Badge count={this.state.cartCount}></Badge>
               </Link>
@@ -50,7 +51,12 @@ class Header extends Component {
 }
 
 const mapStateToProps = state => ({
-   cartData: state.cartReducer
+   cartData: state.cartReducer,
+
+});
+
+const mapDispatchToProps = dispatch =>({
+   openCartTray : ()=> {dispatch({type: 'OPENCARTTRAY'})}
 })
 
-export default connect(mapStateToProps)(Header);
+export default connect(mapStateToProps, mapDispatchToProps)(Header);
