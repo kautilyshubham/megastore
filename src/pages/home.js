@@ -56,6 +56,15 @@ class home extends Component {
                <div className="container" style={{marginTop: "40px"}}>
                    <Sidebar />
                    <div className="home_right">
+                       <div className="top">
+                               <input type="text" Search placeholder="Search item"
+                               onChange={(e)=>console.log(e)} />
+                               <select name="order" id="">
+                                   <option value="null">Select Order</option>
+                                   <option value="Lowest to highest">Lowest to highest</option>
+                                   <option value="Highest to lowest">Highest to lowest</option>
+                               </select>
+                       </div>
                         {latestItems}
                    </div>
                  

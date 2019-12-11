@@ -1,9 +1,13 @@
 import React from 'react';
 import SizeButton from '../components/sizeButton';
 import { connect } from 'react-redux';
-
+import { Slider } from 'antd';
 
 const sidebar = (props)=> {
+    function formatter(value) {
+        return `${value * 20}`;
+      }
+      
         return ( 
             <div className="sidebar">
                <p>Select size</p>
@@ -16,13 +20,29 @@ const sidebar = (props)=> {
                         <SizeButton 
                         key={i} 
                         text={item} 
-                        clicked={()=>props.sizeFilter(item)}
+                        clicked={()=>{props.sizeFilter(item) }}
                         addedClass= {(i === props.activeSize) ? "active": ""}
+                        onClick={props.childClicked}
                         
                          />
                     )
                    })
                }
+               <br /><br />
+               <p>Select Price Range</p>
+               <div>
+                    <Slider 
+                    range 
+                    defaultValue={[80, 90]}
+                    step={10}
+                    // onChange={'a'}
+                    // onAfterChange={'a'}
+                    tipFormatter={formatter} 
+                    tooltipVisible
+                    min = {10}
+                    
+                    />
+                </div>
             </div>
          );
     }

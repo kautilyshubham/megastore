@@ -19,3 +19,23 @@
     padding: 0px 15px;
 
 }
+.top{
+    width: 100%;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+input, select{
+    border: 1px solid #ddd;
+    box-shadow: none;
+    padding: 8px 15px;
+    outline: none;
+    border-radius: 4px;
+}   
+input{
+    min-width: 400px;
+}
+select {
+    min-width: 250px;
+}
