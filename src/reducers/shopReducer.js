@@ -15,6 +15,7 @@ const initialState ={
     },
     activeFilter:{
       size: '',
+      search: '',
 
     },
     activeFilterCount:{
@@ -29,14 +30,23 @@ const initialState ={
           return {
             ...state,
             ...state.activeFilter.size = action.payLoad,
-            ...state.activeFilterCount.sizeFitler = state.fiters.size.indexOf(action.payLoad)
-
+            ...state.activeFilterCount.sizeFitler = state.fiters.size.indexOf(action.payLoad),
           };
-        case "RESETFILTER":
+        
+        case "SEARCHFILTER":
+          return {
+            ...state,
+            ...state.activeFilter.search = action.payLoad,
+            ...state.items = state.items.filter(item => item.name.indexOf(state.activeFilter.search) !== -1)
+
+          }
+
+          case "RESETFILTER":
           return {
             ...state,
             ...state.activeFilter.size = "",
-            ...state.activeFilterCount.sizeFitler = ""
+            ...state.activeFilterCount.sizeFitler = "",
+            ...state.activeFilter.search = "",
 
           }
           case "ADDEDTOCART": {

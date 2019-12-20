@@ -1,5 +1,4 @@
 import React from 'react';
-import SizeButton from '../components/sizeButton';
 import { connect } from 'react-redux';
 import { Slider } from 'antd';
 
@@ -17,14 +16,14 @@ const sidebar = (props)=> {
                {
                    props.size.map((item,i)=>{
                     return (
-                        <SizeButton 
+                        <button 
                         key={i} 
                         text={item} 
-                        clicked={()=>{props.sizeFilter(item) }}
-                        addedClass= {(i === props.activeSize) ? "active": ""}
-                        onClick={props.childClicked}
-                        
-                         />
+                        onClick={()=>{props.sizeFilter(item) }}
+                        className= {`size_button ${(i === props.activeSize) ? 'active': null}`}
+                        >
+                            {item}
+                         </button>
                     )
                    })
                }
